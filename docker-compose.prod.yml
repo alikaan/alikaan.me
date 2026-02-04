@@ -1,0 +1,60 @@
+version: '3.8'
+
+services:
+  resume-web:
+    image: alikaan-me:latest
+    container_name: alikaan-me-web
+    environment:
+      - VIRTUAL_HOST=alikaan.me,www.alikaan.me
+      - LETSENCRYPT_HOST=alikaan.me,www.alikaan.me
+      - LETSENCRYPT_EMAIL=turkmenalikaan@gmail.com
+    expose:
+      - "80"
+    restart: unless-stopped
+    networks:
+      - alikaan-me-network
+
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy
+    container_name: nginx-proxy
+    labels:
+      - "com.github.nginx-proxy.nginx"
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - certs:/etc/nginx/certs
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+    networks:
+      - alikaan-me-network
+    restart: unless-stopped
+
+  letsencrypt:
+    image: nginxproxy/acme-companion
+    container_name: letsencrypt
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - certs:/etc/nginx/certs:rw
+      - vhost:/etc/nginx/vhost.d
+      - html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
+    environment:
+      - DEFAULT_EMAIL=turkmenalikaan@gmail.com
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+    depends_on:
+      - nginx-proxy
+    networks:
+      - alikaan-me-network
+    restart: unless-stopped
+
+networks:
+  alikaan-me-network:
+    driver: bridge
+
+volumes:
+  certs:
+  vhost:
+  html:
+  acme:

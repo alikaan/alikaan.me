@@ -1,17 +1,15 @@
 version: '3.8'
 
 services:
-  portfolio:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    container_name: alikaan-portfolio
+  resume-web:
+    image: alikaan-me:latest
+    container_name: alikaan-me-web
     ports:
-      - "8080:80"
+      - "80:80"
     restart: unless-stopped
     networks:
-      - portfolio-network
+      - alikaan-me-network
 
 networks:
-  portfolio-network:
+  alikaan-me-network:
     driver: bridge
