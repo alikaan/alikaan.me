@@ -5,7 +5,7 @@ services:
     image: alikaan-me:latest
     container_name: alikaan-me-web
     ports:
-      - "80:80"
+      - "8080:80"
     restart: unless-stopped
     networks:
       - alikaan-me-network
