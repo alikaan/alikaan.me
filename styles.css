@@ -225,6 +225,16 @@ a {
     .menu-toggle.active span:nth-child(3) {
         transform: rotate(-45deg) translate(8px, -8px);
     }
+
+    .hero-wrapper {
+        flex-direction: column;
+        gap: 2rem;
+    }
+
+    .profile-picture {
+        width: 200px;
+        height: 200px;
+    }
 }
 
 /* ==================== */
@@ -259,8 +269,48 @@ a {
     50% { background-position: 100% 50%; }
 }
 
+.hero-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4rem;
+    flex-wrap: wrap;
+    position: relative;
+    z-index: 1;
+}
+
+.hero-image {
+    animation: fadeInLeft 1s ease;
+}
+
+@keyframes fadeInLeft {
+    from {
+        opacity: 0;
+        transform: translateX(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+.profile-picture {
+    width: 280px;
+    height: 280px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 6px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    transition: var(--transition);
+}
+
+.profile-picture:hover {
+    transform: scale(1.05);
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
 .hero-content {
-    max-width: 800px;
+    max-width: 600px;
     text-align: center;
     position: relative;
     z-index: 1;

@@ -11,6 +11,7 @@ RUN rm -rf ./*
 COPY index.html .
 COPY styles.css .
 COPY script.js .
+COPY profile.jpg .
 
 # Copy nginx configuration (optional - using default)
 # COPY nginx.conf /etc/nginx/nginx.conf
