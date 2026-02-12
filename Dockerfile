@@ -12,6 +12,7 @@ COPY index.html .
 COPY styles.css .
 COPY script.js .
 COPY profile.jpg .
+COPY favicon.svg .
 
 # Copy nginx configuration (optional - using default)
 # COPY nginx.conf /etc/nginx/nginx.conf
