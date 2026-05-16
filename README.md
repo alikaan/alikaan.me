@@ -1,87 +1,69 @@
-# Ali Kaan Turkmen - Portfolio Website
+# Ali Kaan Türkmen — Portfolio Website
 
-A modern, responsive portfolio website showcasing my experience, projects, and skills as a Full Stack Software Engineer and AI Specialist.
+A responsive, single-page portfolio for a Senior Software Engineer specialising in Embedded Systems, Backend Development, and DevOps.
 
-## 🚀 Features
+## Technologies
 
-- **Responsive Design**: Fully responsive layout that works on all devices
-- **Modern UI/UX**: Clean, professional design with smooth animations
-- **Interactive Elements**: Dynamic navigation, smooth scrolling, and hover effects
-- **Performance Optimized**: Fast loading with lazy loading and debounced events
-- **Dark Mode Support**: Automatic dark mode based on system preferences
-- **Accessibility**: Semantic HTML and ARIA labels for better accessibility
+- HTML5, CSS3 (CSS variables, Grid, Flexbox), Vanilla JavaScript (ES6+)
+- Google Fonts (Inter) — only external dependency
+- nginx:alpine (Docker) for serving
+- nginx-proxy + Let's Encrypt ACME companion for production TLS
 
-## 🛠️ Technologies Used
-
-- HTML5
-- CSS3 (with CSS Variables and Grid/Flexbox)
-- Vanilla JavaScript (ES6+)
-- Google Fonts (Inter)
-
-## 📁 Project Structure
+## Project Structure
 
 ```
 alikaan.me/
-├── index.html          # Main HTML file
-├── styles.css          # Stylesheet
-├── script.js           # JavaScript functionality
-└── README.md           # This file
+├── index.html              # All content and markup
+├── styles.css              # All styles (CSS variables in :root for theming)
+├── script.js               # Scroll animations, nav, mobile menu, interactions
+├── profile.jpg             # Profile photo
+├── favicon.svg             # Site favicon
+├── Dockerfile              # nginx:alpine image
+├── docker-compose.yml      # Dev config (port 8080)
+├── docker-compose.prod.yml # Prod config (nginx-proxy + TLS)
+├── build.sh                # Builds Docker image
+└── deploy.sh               # Pulls, builds, and restarts containers
 ```
 
-## 🎨 Sections
+## Getting Started
 
-- **Home/Hero**: Eye-catching introduction with call-to-action buttons
-- **About**: Brief introduction and key highlights
-- **Experience**: Timeline of professional experience
-- **Projects**: Showcase of featured projects
-- **Skills**: Categorized list of technical skills
-- **Education**: Academic background
-- **Contact**: Multiple ways to get in touch
+**Without Docker:**
 
-## 🚀 Getting Started
+```bash
+python -m http.server 8000
+# or
+npx serve
+```
 
-1. Clone this repository:
-   ```bash
-   git clone https://github.com/alikaan/alikaan.me.git
-   ```
+**With Docker (dev):**
 
-2. Open `index.html` in your browser or use a local server:
-   ```bash
-   # Using Python
-   python -m http.server 8000
-   
-   # Using Node.js
-   npx serve
-   ```
+```bash
+./build.sh
+./deploy.sh        # serves on http://localhost:8080
+```
 
-3. Navigate to `http://localhost:8000` in your browser
+**Production deployment:**
 
-## 📝 Customization
+```bash
+./deploy.sh prod   # serves on port 80/443 with auto TLS for alikaan.me
+```
 
-To customize this portfolio for your own use:
+**Stop containers:**
 
-1. Update the content in `index.html` with your information
-2. Modify colors in `styles.css` by changing CSS variables in `:root`
-3. Replace social media links and contact information
-4. Add your own projects and experience
+```bash
+./deploy.sh down
+./deploy.sh prod down
+```
 
-## 🌐 Browser Support
+## Customisation
 
-- Chrome (latest)
-- Firefox (latest)
-- Safari (latest)
-- Edge (latest)
+- Content: edit `index.html`
+- Colors / design tokens: change CSS variables in the `:root` block in `styles.css`
+- New static assets: add `COPY` instructions in `Dockerfile`
 
-## 📄 License
+## Contact
 
-This project is open source and available under the MIT License.
-
-## 📧 Contact
-
-- Email: turkmen.alikaan@gmail.com
-- LinkedIn: [linkedin.com/in/alikaan](https://linkedin.com/in/alikaan)
+- Email: [turkmenalikaan@gmail.com](mailto:turkmenalikaan@gmail.com)
+- LinkedIn: [linkedin.com/in/alikaanturkmen](https://linkedin.com/in/alikaanturkmen)
 - GitHub: [github.com/alikaan](https://github.com/alikaan)
-
----
-
-Built with ❤️ by Ali Kaan Turkmen
+- Medium: [medium.com/@alikaanturkmen](https://medium.com/@alikaanturkmen)
