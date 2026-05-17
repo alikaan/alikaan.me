@@ -203,18 +203,18 @@ document.querySelectorAll('.timeline-item, .project-card, .skill-category, .educ
 // ==================== 
 // Counter Animation for Highlights
 // ====================
-function animateCounter(element, target, duration = 2000) {
+function animateCounter(element, target, suffix = '', duration = 2000) {
     const start = 0;
     const increment = target / (duration / 16);
     let current = start;
-    
+
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-            element.textContent = target + '+';
+            element.textContent = target + suffix + '+';
             clearInterval(timer);
         } else {
-            element.textContent = Math.floor(current) + '+';
+            element.textContent = Math.floor(current) + suffix + '+';
         }
     }, 16);
 }
@@ -225,8 +225,10 @@ const highlightObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting && !entry.target.classList.contains('counted')) {
             const number = entry.target.querySelector('.highlight-number');
             if (number) {
-                const targetValue = parseInt(number.textContent);
-                animateCounter(number, targetValue);
+                const raw = number.textContent.replace('+', '');
+                const suffix = raw.replace(/[\d.]+/, '');
+                const targetValue = parseFloat(raw);
+                animateCounter(number, targetValue, suffix);
                 entry.target.classList.add('counted');
             }
         }
