@@ -34,13 +34,17 @@ HAS_LOCAL_CHANGES=false
 echo "$PULL_OUTPUT" | grep -q "Already up to date." || HAS_PULL_CHANGES=true
 [ -n "$STATUS_OUTPUT" ] && HAS_LOCAL_CHANGES=true
 
-if ! $HAS_PULL_CHANGES && ! $HAS_LOCAL_CHANGES; then
+RUNNING=$(docker compose -f $COMPOSE_FILE ps -q 2>/dev/null)
+[ -z "$RUNNING" ] && HAS_NO_CONTAINERS=true || HAS_NO_CONTAINERS=false
+
+if ! $HAS_PULL_CHANGES && ! $HAS_LOCAL_CHANGES && ! $HAS_NO_CONTAINERS; then
     echo -e "${YELLOW}No changes detected — skipping rebuild.${NC}"
     exit 0
 fi
 
 [ "$HAS_LOCAL_CHANGES" = true ] && echo -e "${YELLOW}Local changes detected — deploying.${NC}"
 [ "$HAS_PULL_CHANGES" = true ] && echo -e "${YELLOW}Remote changes pulled — deploying.${NC}"
+[ "$HAS_NO_CONTAINERS" = true ] && echo -e "${YELLOW}No running containers found — deploying for the first time.${NC}"
 
 echo -e "${YELLOW}Building Docker image...${NC}"
 ./build.sh
