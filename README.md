@@ -16,7 +16,7 @@ alikaan.me/
 ├── index.html              # All content and markup
 ├── styles.css              # All styles (CSS variables in :root for theming)
 ├── script.js               # Scroll animations, nav, mobile menu, interactions
-├── profile.jpg             # Profile photo
+├── pp-2026.jpeg             # Profile photo
 ├── favicon.svg             # Site favicon
 ├── Dockerfile              # nginx:alpine image
 ├── docker-compose.yml      # Dev config (port 8080)

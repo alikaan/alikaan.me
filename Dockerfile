@@ -11,7 +11,7 @@ RUN rm -rf ./*
 COPY index.html .
 COPY styles.css .
 COPY script.js .
-COPY profile.jpg .
+COPY pp-2026.jpeg .
 COPY favicon.svg .
 
 # Copy nginx configuration (optional - using default)
